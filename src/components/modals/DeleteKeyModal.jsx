@@ -10,7 +10,7 @@ export default function DeleteKeyModal({ isOpen, keyToDelete, onClose, onConfirm
         {isLoading && <LoadingOverlay message="Deleting key..." />}
         <div className="flex justify-between items-start">
           <h3 className="text-2xl font-bold text-gray-900">
-            Delete API Key '{keyToDelete.name}'
+            Delete API Key "{keyToDelete.name}"
           </h3>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <XMarkIcon className="w-5 h-5" />

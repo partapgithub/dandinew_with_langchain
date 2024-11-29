@@ -71,7 +71,7 @@ export default function EditKeyModal({
           </div>
 
           <p className="text-sm text-gray-500">
-            * If the combined usage of all your keys exceeds your plan's limit, all requests will be rejected.
+            * If the combined usage of all your keys exceeds your plan limit, all requests will be rejected.
           </p>
 
           <div className="flex justify-end gap-3">
