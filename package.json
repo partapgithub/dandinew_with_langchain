@@ -10,13 +10,20 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@langchain/community": "^0.3.16",
+    "@langchain/core": "^0.3.19",
+    "@langchain/openai": "^0.3.14",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/supabase-js": "^2.46.1",
+    "dotenv": "^16.4.5",
+    "langchain": "^0.3.6",
     "next": "^14.2.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
-    "uuid": "^11.0.3"
+    "typescript": "^5.7.2",
+    "uuid": "^11.0.3",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "eslint": "^8",
