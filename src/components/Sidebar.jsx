@@ -10,6 +10,7 @@ export default function Sidebar() {
     { name: 'home', path: '/' },
     { name: 'about', path: '/about' },
     { name: 'play ground', path: '/protected' },
+    { name: 'github-summarizer', path: '/github-summarizer' },
     { name: 'blog', path: '/blog' },
     { name: 'portfolio', path: '/portfolio' },
     { name: 'contact', path: '/contact' },
