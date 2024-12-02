@@ -31,7 +31,7 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "frame-src 'self' https://vercel.live https://*.vercel.app;",
-              "connect-src 'self' https://*.supabase.co https://vercel.live https://*.vercel.app wss://*.supabase.co;",
+              "connect-src 'self' https://*.supabase.co https://vercel.live https://*.vercel.app wss://*.supabase.co https://*.pusher.com wss://*.pusher.com https://sockjs-*.pusher.com;",
               "default-src 'self';",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel.app;",
               "style-src 'self' 'unsafe-inline' https://vercel.live https://*.vercel.app;",
