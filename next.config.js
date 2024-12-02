@@ -42,6 +42,7 @@ const nextConfig = {
                 "style-src 'self' 'unsafe-inline'; " +
                 "img-src 'self' data: https:; " +
                 "font-src 'self' data:; " +
+                "frame-src 'self' https://vercel.live; " +
                 "connect-src 'self' https://*.vercel.app https://vercel.live https://*.supabase.co https://ztgdyzqyktwyfrznpcic.supabase.co;"
               : ""
           }
