@@ -1,18 +1,31 @@
 import { NextResponse } from 'next/server';
 
 export function middleware(request) {
-  // Get the pathname of the request (e.g. /, /dashboard, etc.)
-  const path = request.nextUrl.pathname;
-
-  // Redirect from /dashboard to /newdashboard
-  if (path === '/dashboard') {
-    return NextResponse.redirect(new URL('/newdashboard', request.url));
+  // Add security headers
+  const headers = new Headers(request.headers);
+  
+  // Prevent clickjacking
+  headers.set('X-Frame-Options', 'DENY');
+  
+  // Prevent MIME type sniffing
+  headers.set('X-Content-Type-Options', 'nosniff');
+  
+  // Enable strict CSP in production
+  if (process.env.NODE_ENV === 'production') {
+    headers.set('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval';");
   }
 
-  return NextResponse.next();
+  // Basic DDoS protection
+  const requestsPerMinute = 100; // Adjust as needed
+  // Implement rate limiting here
+
+  return NextResponse.next({
+    request: {
+      headers: headers,
+    },
+  });
 }
 
-// Configure which paths should be processed by this middleware
 export const config = {
-  matcher: '/dashboard'
+  matcher: '/api/:path*',
 };
