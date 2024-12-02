@@ -7,39 +7,22 @@ export function middleware(request) {
   if (process.env.NODE_ENV === 'production') {
     const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
 
-    const cspDirectives = [
-      // Default fallback
-      "default-src 'self'",
-      // Scripts
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel.app",
-      // Styles
-      "style-src 'self' 'unsafe-inline'",
-      // Images
-      "img-src 'self' data: blob: https:",
-      // Fonts
-      "font-src 'self' data:",
-      // Frames - explicitly allow Vercel Live
-      "frame-src 'self' https://vercel.live",
-      // Connections - explicitly allow Supabase and Vercel
-      "connect-src 'self' https://*.supabase.co https://vercel.live https://*.vercel.app wss://*.supabase.co",
-      // Workers
-      "worker-src 'self' blob:",
-      // Child sources
-      "child-src 'self' blob: https://vercel.live",
-      // Forms
-      "form-action 'self'",
-      // Media
-      "media-src 'self'",
-      // Manifests
-      "manifest-src 'self'",
-      // Object sources
-      "object-src 'none'"
-    ].join('; ');
-
-    // Set CSP header
+    // Set CSP header with explicit frame-src before default-src
     response.headers.set(
       'Content-Security-Policy',
-      cspDirectives
+      "frame-src 'self' https://vercel.live; " +
+      "connect-src 'self' https://*.supabase.co https://vercel.live https://*.vercel.app wss://*.supabase.co; " +
+      "default-src 'self'; " +
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel.app; " +
+      "style-src 'self' 'unsafe-inline'; " +
+      "img-src 'self' data: blob: https:; " +
+      "font-src 'self' data:; " +
+      "worker-src 'self' blob:; " +
+      "child-src 'self' blob: https://vercel.live; " +
+      "form-action 'self'; " +
+      "media-src 'self'; " +
+      "manifest-src 'self'; " +
+      "object-src 'none'"
     );
   }
 
@@ -60,14 +43,6 @@ export function middleware(request) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except:
-     * 1. /api/ (API routes)
-     * 2. /_next/ (Next.js internals)
-     * 3. /_static (inside /public)
-     * 4. /_vercel (Vercel internals)
-     * 5. all root files inside /public (e.g. /favicon.ico)
-     */
     '/((?!api|_next|_static|_vercel|[\\w-]+\\.\\w+).*)',
   ],
 };
