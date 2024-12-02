@@ -8,56 +8,6 @@ const nextConfig = {
   },
   // Disable source maps in production
   productionBrowserSourceMaps: false,
-  // Add security headers
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on'
-          },
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains'
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
-          },
-          {
-            key: 'Content-Security-Policy',
-            value: process.env.NODE_ENV === 'production' 
-              ? [
-                  "default-src 'self' https://*.supabase.co https://vercel.live https://*.vercel.app",
-                  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel.app",
-                  "style-src 'self' 'unsafe-inline'",
-                  "img-src 'self' data: https:",
-                  "font-src 'self' data:",
-                  "frame-src 'self' https://vercel.live",
-                  "connect-src 'self' https://*.vercel.app https://vercel.live https://*.supabase.co https://ztgdyzqyktwyfrznpcic.supabase.co",
-                  "worker-src 'self' blob:",
-                  "child-src 'self' blob: https://vercel.live",
-                  "form-action 'self'",
-                  "media-src 'self' https:",
-                  "manifest-src 'self'",
-                  "object-src 'none'"
-                ].join('; ')
-              : ""
-          }
-        ]
-      }
-    ];
-  },
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       config.plugins.push(
@@ -74,4 +24,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig; 
+module.exports = nextConfig;
