@@ -6,7 +6,8 @@ export async function POST(request) {
   try {
     const { githubUrl } = await request.json();
     //console.log("request.headers: ", request.headers);
-    const apiKey = request.headers.get('x-api-key');
+    const apiKey = process.env.NODE_ENV !== 'production' ? request.headers.get('x-api-key') : process.env.API_KEY
+    //const apiKey = request.headers.get('x-api-key');
     // Validate that API key is provided
     if (!apiKey) {
       return Response.json({ error: 'API key is required' }, { status: 401 });

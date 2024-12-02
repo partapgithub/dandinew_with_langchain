@@ -24,7 +24,7 @@ export default function Login() {
 
       if (data?.session) {
         console.log('Login successful, redirecting...');
-        document.location.href = '/dashboard';
+        document.location.href = '/newdashboard';
       }
 
     } catch (error) {
